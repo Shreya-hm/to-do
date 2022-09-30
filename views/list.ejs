@@ -1,0 +1,38 @@
+<%-  include("header") -%>
+        <div class="box" id="heading">
+            <h1> <%= listTitle %></h1>
+        </div>
+
+        <div class="box">
+            <% newListItems.forEach(function(i){ %>
+
+                <!-- step 12 we add a form elementto the div element this is 
+                    the first process of deleting item-->
+                <form action="/delete" method="post">
+                <div class="item">
+
+                    <!-- step 12 third process
+                    adding the onChange method -->
+
+                    <input type="checkbox" name="checkbox"  value="<%=i._id%>" onchange="this.form.submit()">
+                    <!-- step 8 to only tap into the name field 
+                    1st problem solved -->
+                    <p><%=i.name%></p>
+                </div> 
+                
+                <!-- STEP 19 FIRST PROCESS -->
+                <input type="hidden" name="listName" value="<%= listTitle %>">
+            </form>
+                <% })%>
+
+                <!-- autocomplete is turned off so as to off the suggestions -->
+                <form class="item"action="/" method="post">
+                    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                    
+                    <!-- STEP 18 to solve the rollback problem we change the name and value -->
+                    <button type="submit" name="list" value="<%= listTitle %>" >+</button>
+                </form>
+        </div>
+    
+        <%-  include("footer") -%> 
+   
